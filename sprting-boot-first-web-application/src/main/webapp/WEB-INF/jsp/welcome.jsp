@@ -8,6 +8,6 @@
 </head>
 <body>
  	welcome ${mame}!!
- 	your password is ${password}
+	<a href="/list-todos">click here</a> to manage your todos
 </body>
 </html>
