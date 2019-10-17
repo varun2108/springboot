@@ -1,26 +1,22 @@
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="c"%>
-<html>
-
-<head>
-<title>First Web Application</title>
-</head>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	    		rel="stylesheet">
-<body>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 ADD Todo Page for ${name}
 
 <div class="container">
-		<c:form method="post" modelAttribute="todo">
+		<a:form method="post" modelAttribute="todo">
+		<a:hidden path="id"/>
 			<fieldset class="form-group">
-				<c:label path="desc">Description</c:label>
-				<c:input path="desc" type="text" class="form-control" required="required"/>
-				<c:errors path="desc" class="alert-warning"></c:errors>
+				<a:label path="desc">Description</a:label>
+				<a:input path="desc" type="text" class="form-control" required="required"/>
+				<a:errors path="desc" class="alert-warning"></a:errors>
+			</fieldset>
+				<fieldset class="form-group">
+				<a:label path="targetDate">Target Date</a:label>
+				<a:input path="targetDate" id="targetDate" type="text" class="form-control"
+					required="required" />
+				<a:errors path="targetDate" cssClass="text-warning" />
 			</fieldset>
 			<input type="submit" />
-		</c:form>
+		</a:form>
 	</div>
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-	    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+	<%@ include file="common/footer.jspf" %>

@@ -1,6 +1,8 @@
 package com.example.sprtingbootfirstwebapplication.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,29 +15,23 @@ import com.example.sprtingbootfirstwebapplication.servieces.LoginServiece;
 
 @Controller
 @SessionAttributes("name")
-public class LoginControler {
+public class WelcomeControler {
 	 @Autowired
 	 private LoginServiece logser;
-	 @RequestMapping(value = "/login",method = RequestMethod.GET)
+	 @RequestMapping(value = "/",method = RequestMethod.GET)
 	   
 	    public String sayHello(ModelMap model)  {
-	        return "login";
-	    }
-	 @RequestMapping(value = "/login",method = RequestMethod.POST)
-	   
-	    public String saywelcome(ModelMap model,@RequestParam String Name, @RequestParam String password)  {
-		 	
-		 boolean val=logser.validateuser(Name, password);
-		 
-		 	if(!val)
-		 	{
-		 		model.put("ErrorMessage","invalid credentials");
-		 		return "login";
-		 	}
-		 	
-		 	model.put("name", Name);
-		 	model.put("password",password);
+		 model.put("name", "varun");
 	        return "welcome";
 	    }
+	 private String getLoggedInUserName(ModelMap model) {
+			Object principal = SecurityContextHolder.getContext()
+					.getAuthentication().getPrincipal();
 
+			if (principal instanceof UserDetails)
+				return ((UserDetails) principal).getUsername();
+
+			return principal.toString();
+		}
+	
 	}
